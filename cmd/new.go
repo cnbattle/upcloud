@@ -14,16 +14,25 @@ func init() {
 		Short: "create a config data.",
 		Long:  `create a config data.`,
 		Run: func(cmd *cobra.Command, args []string) {
+			fmt.Print("请输入项目名称：")
+			var projectName string
+			fmt.Scanln(&projectName)
 			// 选择平台
-			var index int
 			for i, i2 := range cloud.Platform {
 				i++
-				fmt.Printf("%v %s\n", i, i2)
+				fmt.Printf("%v-%s\n", i, i2)
 			}
 			fmt.Print("请选择平台编号：")
+			var index int
 			fmt.Scanln(&index)
-			fmt.Println("index:", index)
-			fmt.Println("index data:", cloud.Platform[index-1])
+			platform, err := cloud.SelectPlatform(cloud.Platform[index-1])
+			if err != nil {
+				panic(err)
+			}
+			err = platform.Setting(projectName)
+			if err != nil {
+				panic(err)
+			}
 		},
 	}
 

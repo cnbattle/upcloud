@@ -2,11 +2,14 @@ package cloud
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"github.com/qiniu/api.v7/v7/auth/qbox"
 	"github.com/qiniu/api.v7/v7/cdn"
 	"github.com/qiniu/api.v7/v7/sms/rpc"
 	"github.com/qiniu/api.v7/v7/storage"
+	"io/ioutil"
+	"os"
 )
 
 func init() {
@@ -14,15 +17,15 @@ func init() {
 }
 
 type Qiniu struct {
-	AccessKey     string
-	SecretKey     string
-	Bucket        string
-	upToken       string
-	mac           *qbox.Mac
-	bucketManager *storage.BucketManager
+	AccessKey     string                 `json:"access_key"`
+	SecretKey     string                 `json:"secret_key"`
+	Bucket        string                 `json:"bucket"`
+	upToken       string                 `json:"-"`
+	mac           *qbox.Mac              `json:"-"`
+	bucketManager *storage.BucketManager `json:"-"`
 }
 
-func (q *Qiniu) Init() {
+func (q *Qiniu) Init() error {
 	putPolicy := storage.PutPolicy{
 		Scope: q.Bucket,
 	}
@@ -38,6 +41,7 @@ func (q *Qiniu) Init() {
 	q.bucketManager = storage.NewBucketManager(q.mac, &cfg)
 
 	q.upToken = putPolicy.UploadToken(q.mac)
+	return nil
 }
 
 func (q *Qiniu) GetAll() (list []string, err error) {
@@ -117,7 +121,22 @@ func (q *Qiniu) Prefetch() error {
 	return err
 }
 
-func (q *Qiniu) Setting() error {
+func (q *Qiniu) Setting(projectName string) error {
+	fmt.Print("Qiniu AccessKey：")
+	fmt.Scanln(&q.AccessKey)
+	fmt.Print("Qiniu SecretKey：")
+	fmt.Scanln(&q.SecretKey)
+	fmt.Print("Qiniu Bucket：")
+	fmt.Scanln(&q.Bucket)
 
+	b, err := json.Marshal(q)
+	if err != nil {
+		fmt.Println("error:", err)
+	}
+	//生成json文件
+	err = ioutil.WriteFile(projectName+".json", b, os.ModeAppend)
+	if err != nil {
+		return err
+	}
 	return nil
 }
