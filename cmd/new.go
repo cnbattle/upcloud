@@ -14,9 +14,7 @@ func init() {
 		Short: "create a config data.",
 		Long:  `create a config data.`,
 		Run: func(cmd *cobra.Command, args []string) {
-			fmt.Print("请输入项目名称：")
-			var projectName string
-			fmt.Scanln(&projectName)
+
 			// 选择平台
 			for i, i2 := range cloud.Platform {
 				i++
@@ -29,7 +27,7 @@ func init() {
 			if err != nil {
 				panic(err)
 			}
-			err = platform.Setting(projectName)
+			err = platform.Setting()
 			if err != nil {
 				panic(err)
 			}

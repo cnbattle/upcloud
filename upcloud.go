@@ -2,10 +2,14 @@ package main
 
 import (
 	"github.com/cnbattle/upcloud/cmd"
+	"github.com/cnbattle/upcloud/core/utils"
 	"github.com/spf13/cobra"
+	"log"
 )
 
 func main() {
+
+	log.Println(utils.Home())
 	var rootCmd = &cobra.Command{Use: "upcloud"}
 	rootCmd.AddCommand(cmd.Create)
 	rootCmd.Execute()
