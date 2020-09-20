@@ -1,9 +1,13 @@
 package cmd
 
 import (
+	"encoding/json"
 	"fmt"
+	"github.com/cnbattle/upcloud/config"
 	"github.com/cnbattle/upcloud/core/cloud"
+	"github.com/cnbattle/upcloud/core/utils"
 	"github.com/spf13/cobra"
+	"io/ioutil"
 )
 
 var Create *cobra.Command
@@ -26,7 +30,14 @@ func init() {
 			if err != nil {
 				panic(err)
 			}
-			err = platform.Setting()
+			setting := platform.Setting()
+			config.Conf = append(config.Conf, setting)
+			b, err := json.Marshal(config.Conf)
+			if err != nil {
+				panic(err)
+			}
+			//生成json文件
+			err = ioutil.WriteFile(utils.GetConfig(), b, 0666)
 			if err != nil {
 				panic(err)
 			}

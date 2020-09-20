@@ -2,15 +2,12 @@ package cloud
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
-	"github.com/cnbattle/upcloud/core/utils"
+	"github.com/cnbattle/upcloud/config"
 	"github.com/qiniu/api.v7/v7/auth/qbox"
 	"github.com/qiniu/api.v7/v7/cdn"
 	"github.com/qiniu/api.v7/v7/sms/rpc"
 	"github.com/qiniu/api.v7/v7/storage"
-	"io/ioutil"
-	"os"
 )
 
 func init() {
@@ -122,31 +119,31 @@ func (q *Qiniu) Prefetch() error {
 	return err
 }
 
-func (q *Qiniu) Setting() error {
+func (q *Qiniu) Setting() config.ProjectConfig {
+	var projectName, accessKey, secretKey, bucket string
 START:
 	fmt.Print("请输入项目名称：")
-	var projectName string
 	fmt.Scanln(&projectName)
-	if utils.IsExistProjectConfig(projectName) {
-		fmt.Println("项目名称重复，请重新输入！！！")
+	err := config.IsExitProjectName(projectName)
+	if err != nil {
+		fmt.Println("已存在，请重新输入")
 		goto START
 	}
 	fmt.Print("Qiniu AccessKey：")
-	fmt.Scanln(&q.AccessKey)
+	fmt.Scanln(&accessKey)
 	fmt.Print("Qiniu SecretKey：")
-	fmt.Scanln(&q.SecretKey)
+	fmt.Scanln(&secretKey)
 	fmt.Print("Qiniu Bucket：")
-	fmt.Scanln(&q.Bucket)
+	fmt.Scanln(&bucket)
 
-	b, err := json.Marshal(q)
-	if err != nil {
-		fmt.Println("error:", err)
+	project := config.ProjectConfig{
+		ProjectName: projectName,
+		Platform:    "qiniu",
+		Args: map[string]string{
+			"accessKey": accessKey,
+			"secretKey": secretKey,
+			"bucket":    bucket,
+		},
 	}
-
-	//生成json文件
-	err = ioutil.WriteFile(utils.GetExistProjectConfig(projectName), b, os.ModeAppend)
-	if err != nil {
-		return err
-	}
-	return nil
+	return project
 }

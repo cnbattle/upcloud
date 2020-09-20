@@ -25,38 +25,15 @@ func IsExist(path string) bool {
 	return true
 }
 
-// IsExistProjectConfig 判断项目名称对应的文件是否存在(返回true是存在)
-func IsExistProjectConfig(projectName string) bool {
-	path := GetConfigDir()
-	if IsExist(path + projectName + ".json") {
-		return true
-	}
-	return false
-}
-
-func GetConfigDir() string {
+func GetConfig() string {
 	home, err := Home()
 	if err != nil {
 		panic(err)
 	}
-	path := home + "/.config/upcloud/"
+	path := home + "/.config/upcloud"
 	err = CreateDir(path)
 	if err != nil {
 		panic(err)
 	}
-	return path
-}
-
-// GetExistProjectConfig 获取项目名称对应的文件的路径名称
-func GetExistProjectConfig(projectName string) string {
-	home, err := Home()
-	if err != nil {
-		panic(err)
-	}
-	path := home + "/.config/upcloud/"
-	err = CreateDir(path)
-	if err != nil {
-		panic(err)
-	}
-	return path + projectName + ".json"
+	return path + "/config"
 }
