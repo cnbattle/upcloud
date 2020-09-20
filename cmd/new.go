@@ -14,7 +14,6 @@ func init() {
 		Short: "create a config data.",
 		Long:  `create a config data.`,
 		Run: func(cmd *cobra.Command, args []string) {
-
 			// 选择平台
 			for i, i2 := range cloud.Platform {
 				i++

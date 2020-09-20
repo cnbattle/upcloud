@@ -2,16 +2,12 @@ package main
 
 import (
 	"github.com/cnbattle/upcloud/cmd"
-	"github.com/cnbattle/upcloud/core/utils"
 	"github.com/spf13/cobra"
-	"log"
 )
 
 func main() {
-
-	log.Println(utils.Home())
 	var rootCmd = &cobra.Command{Use: "upcloud"}
-	rootCmd.AddCommand(cmd.Create)
+	rootCmd.AddCommand(cmd.Create, cmd.List, cmd.Deploy)
 	rootCmd.Execute()
 	// 获取已存在文件列表
 	// 删除已存在文件

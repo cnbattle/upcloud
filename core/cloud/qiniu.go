@@ -123,25 +123,14 @@ func (q *Qiniu) Prefetch() error {
 }
 
 func (q *Qiniu) Setting() error {
-	home, err := utils.Home()
-	if err != nil {
-		panic(err)
-	}
-	path := home + "/.config/upcloud/"
-	err = utils.CreateDir(path)
-	if err != nil {
-		panic(err)
-	}
-
 START:
 	fmt.Print("请输入项目名称：")
 	var projectName string
 	fmt.Scanln(&projectName)
-	if utils.IsExist(path + projectName + ".json") {
+	if utils.IsExistProjectConfig(projectName) {
 		fmt.Println("项目名称重复，请重新输入！！！")
 		goto START
 	}
-
 	fmt.Print("Qiniu AccessKey：")
 	fmt.Scanln(&q.AccessKey)
 	fmt.Print("Qiniu SecretKey：")
@@ -155,7 +144,7 @@ START:
 	}
 
 	//生成json文件
-	err = ioutil.WriteFile(path+projectName+".json", b, os.ModeAppend)
+	err = ioutil.WriteFile(utils.GetExistProjectConfig(projectName), b, os.ModeAppend)
 	if err != nil {
 		return err
 	}
