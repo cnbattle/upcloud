@@ -1,9 +1,12 @@
 package cmd
 
 import (
+	"github.com/cnbattle/upcloud/config"
+	"github.com/modood/table"
 	"github.com/spf13/cobra"
 )
 
+// List 列表
 var List *cobra.Command
 
 func init() {
@@ -13,12 +16,7 @@ func init() {
 		TraverseChildren: true,
 		Long:             `look project lists.`,
 		Run: func(cmd *cobra.Command, args []string) {
-			//files := utils.Local(utils.GetConfigDir())
-			//for _, file := range files {
-			//	split := strings.Split(file, ".")
-			//	//fmt.Println(i,split[0])
-			//	fmt.Printf("Project Name:%v\tConfig Path:%v\n", split[0], utils.GetExistProjectConfig(split[0]))
-			//}
+			table.Output(config.Conf)
 		},
 	}
 

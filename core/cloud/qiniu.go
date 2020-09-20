@@ -119,6 +119,7 @@ func (q *Qiniu) Prefetch() error {
 	return err
 }
 
+// Setting 设置
 func (q *Qiniu) Setting() config.ProjectConfig {
 	var projectName, accessKey, secretKey, bucket string
 START:
