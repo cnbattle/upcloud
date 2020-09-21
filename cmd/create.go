@@ -15,15 +15,15 @@ var Create *cobra.Command
 func init() {
 	Create = &cobra.Command{
 		Use:   "create",
-		Short: "create a config data.",
-		Long:  `create a config data.`,
+		Short: "create deploy config data.",
+		Long:  `create deploy config data.`,
 		Run: func(cmd *cobra.Command, args []string) {
 			// 选择平台
 			for i, i2 := range cloud.Platform {
 				i++
 				fmt.Printf("%v-%s\n", i, i2)
 			}
-			fmt.Print("请选择平台编号：")
+			fmt.Print("Select Platform No：")
 			var index int
 			fmt.Scanln(&index)
 			platform, err := cloud.SelectPlatform(cloud.Platform[index-1])

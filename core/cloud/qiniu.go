@@ -121,15 +121,17 @@ func (q *Qiniu) Prefetch() error {
 
 // Setting 设置
 func (q *Qiniu) Setting() config.ProjectConfig {
-	var projectName, accessKey, secretKey, bucket string
+	var projectName, path, accessKey, secretKey, bucket string
 START:
-	fmt.Print("请输入项目名称：")
+	fmt.Print("Project Name：")
 	fmt.Scanln(&projectName)
 	err := config.IsExitProjectName(projectName)
 	if err != nil {
 		fmt.Println("已存在，请重新输入")
 		goto START
 	}
+	fmt.Print("Project Path：")
+	fmt.Scanln(&path)
 	fmt.Print("Qiniu AccessKey：")
 	fmt.Scanln(&accessKey)
 	fmt.Print("Qiniu SecretKey：")
@@ -140,6 +142,7 @@ START:
 	project := config.ProjectConfig{
 		ProjectName: projectName,
 		Platform:    "qiniu",
+		Path:        path,
 		Args: map[string]string{
 			"accessKey": accessKey,
 			"secretKey": secretKey,
