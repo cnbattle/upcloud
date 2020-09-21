@@ -35,7 +35,7 @@ func init() {
 
 				err = commInterface.Init()
 				if err != nil {
-					fmt.Println(" commInterface.Init error:", err)
+					fmt.Println("commInterface.Init error:", err)
 					continue
 				}
 				// 获取已存在文件列表
@@ -48,15 +48,15 @@ func init() {
 				// 上传新的文件
 				files := utils.Local(projectConfig.Path)
 				for _, file := range files {
-					err := commInterface.Upload(file, file)
+					err := commInterface.Upload(projectConfig.Path+file, file)
 					if err != nil {
-						fmt.Println(" commInterface.Upload error:", err)
+						fmt.Println("commInterface.Upload error:", err)
 					}
 				}
 				// 刷新index.html
 				err = commInterface.Prefetch()
 				if err != nil {
-					fmt.Println(" commInterface.Prefetch error:", err)
+					fmt.Println("commInterface.Prefetch error:", err)
 					continue
 				}
 
@@ -73,7 +73,7 @@ func selectInterFace(conf config.ProjectConfig) (cloud.CommInterface, error) {
 		qiniu := cloud.Qiniu{
 			AccessKey: conf.Args["accessKey"],
 			SecretKey: conf.Args["secretKey"],
-			Bucket:    conf.Args["bucket:1"],
+			Bucket:    conf.Args["bucket"],
 		}
 		return &qiniu, nil
 	default:
