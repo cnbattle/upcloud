@@ -79,5 +79,4 @@ func selectInterFace(conf config.ProjectConfig) (cloud.CommInterface, error) {
 	default:
 		return nil, errors.New("config platform is error:" + conf.Platform)
 	}
-
 }
