@@ -9,6 +9,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// Deploy 部署命令
 var Deploy *cobra.Command
 
 func init() {

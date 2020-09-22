@@ -10,6 +10,7 @@ import (
 	"strings"
 )
 
+// Delete 删除命令
 var Delete *cobra.Command
 
 func init() {

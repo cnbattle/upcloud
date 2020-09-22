@@ -6,8 +6,10 @@ import (
 	"io/ioutil"
 )
 
+// Conf 配置
 var Conf []ProjectConfig
 
+// ProjectConfig ProjectConfig单配置 struct
 type ProjectConfig struct {
 	ProjectName string            `json:"project_name"`
 	Platform    string            `json:"platform"`

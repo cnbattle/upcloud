@@ -14,20 +14,22 @@ func init() {
 	Platform = append(Platform, "qiniu")
 }
 
+// Qiniu 七牛云
 type Qiniu struct {
 	AccessKey     string                 `json:"access_key"`
 	SecretKey     string                 `json:"secret_key"`
 	Bucket        string                 `json:"bucket"`
-	upToken       string                 `json:"-"`
-	mac           *qbox.Mac              `json:"-"`
-	bucketManager *storage.BucketManager `json:"-"`
+	UpToken       string                 `json:"-"`
+	Mac           *qbox.Mac              `json:"-"`
+	BucketManager *storage.BucketManager `json:"-"`
 }
 
+// Init 初始化
 func (q *Qiniu) Init() error {
 	putPolicy := storage.PutPolicy{
 		Scope: q.Bucket,
 	}
-	q.mac = qbox.NewMac(q.AccessKey, q.SecretKey)
+	q.Mac = qbox.NewMac(q.AccessKey, q.SecretKey)
 
 	cfg := storage.Config{
 		// 是否使用https域名进行资源管理
@@ -36,12 +38,13 @@ func (q *Qiniu) Init() error {
 	// 指定空间所在的区域，如果不指定将自动探测
 	// 如果没有特殊需求，默认不需要指定
 	//cfg.Zone=&storage.ZoneHuabei
-	q.bucketManager = storage.NewBucketManager(q.mac, &cfg)
+	q.BucketManager = storage.NewBucketManager(q.Mac, &cfg)
 
-	q.upToken = putPolicy.UploadToken(q.mac)
+	q.UpToken = putPolicy.UploadToken(q.Mac)
 	return nil
 }
 
+// GetAll 获取全部文件key
 func (q *Qiniu) GetAll() (list []string, err error) {
 	limit := 1000
 	prefix := ""
@@ -49,7 +52,7 @@ func (q *Qiniu) GetAll() (list []string, err error) {
 	//初始列举marker为空
 	marker := ""
 	for {
-		entries, _, nextMarker, hasNext, err := q.bucketManager.ListFiles(q.Bucket, prefix, delimiter, marker, limit)
+		entries, _, nextMarker, hasNext, err := q.BucketManager.ListFiles(q.Bucket, prefix, delimiter, marker, limit)
 		if err != nil {
 			return nil, err
 		}
@@ -67,12 +70,13 @@ func (q *Qiniu) GetAll() (list []string, err error) {
 	return list, nil
 }
 
+// DelAll 批量删除
 func (q *Qiniu) DelAll(list []string) error {
 	deleteOps := make([]string, 0, len(list))
 	for _, key := range list {
 		deleteOps = append(deleteOps, storage.URIDelete(q.Bucket, key))
 	}
-	rets, err := q.bucketManager.Batch(deleteOps)
+	rets, err := q.BucketManager.Batch(deleteOps)
 	if err != nil {
 		// 遇到错误
 		if _, ok := err.(*rpc.ErrorInfo); ok {
@@ -90,6 +94,7 @@ func (q *Qiniu) DelAll(list []string) error {
 	return nil
 }
 
+// Upload 上传
 func (q *Qiniu) Upload(localFile, upKey string) error {
 	cfg := storage.Config{}
 	// 空间对应的机房
@@ -102,15 +107,16 @@ func (q *Qiniu) Upload(localFile, upKey string) error {
 	formUploader := storage.NewFormUploader(&cfg)
 	ret := storage.PutRet{}
 
-	err := formUploader.PutFile(context.Background(), &ret, q.upToken, upKey, localFile, nil)
+	err := formUploader.PutFile(context.Background(), &ret, q.UpToken, upKey, localFile, nil)
 	if err != nil {
 		return err
 	}
 	return nil
 }
 
+// Prefetch 刷新
 func (q *Qiniu) Prefetch() error {
-	cdnManager := cdn.NewCdnManager(q.mac)
+	cdnManager := cdn.NewCdnManager(q.Mac)
 	//刷新链接，单次请求链接不可以超过10个，如果超过，请分批发送请求
 	urlsToRefresh := []string{
 		"http://h5.ygxsj.com/",

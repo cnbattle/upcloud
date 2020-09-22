@@ -1,5 +1,1 @@
 package handle
-
-func Handle() {
-
-}

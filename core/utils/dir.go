@@ -25,6 +25,7 @@ func IsExist(path string) bool {
 	return true
 }
 
+// GetConfig 获取配置的path
 func GetConfig() string {
 	home, err := Home()
 	if err != nil {

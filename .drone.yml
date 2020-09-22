@@ -1,0 +1,114 @@
+---
+kind: pipeline
+name: testing
+
+steps:
+  - name: vet
+    pull: always
+    image: golang:1.14
+    commands:
+      - make vet
+    volumes:
+      - name: gopath
+        path: /go
+
+  - name: lint
+    pull: always
+    image: golang:1.14
+    commands:
+      - make lint
+    volumes:
+      - name: gopath
+        path: /go
+
+  - name: misspell
+    pull: always
+    image: golang:1.14
+    commands:
+      - make misspell-check
+    volumes:
+      - name: gopath
+        path: /go
+
+  - name: test
+    pull: always
+    image: golang:1.14
+    commands:
+      - make test
+    volumes:
+      - name: gopath
+        path: /go
+
+volumes:
+  - name: gopath
+    temp: {}
+
+---
+kind: pipeline
+name: release-binary
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+  - name: build-all-binary
+    pull: always
+    image: golang:1.14
+    commands:
+      - make release
+    when:
+      event:
+        - tag
+
+  - name: deploy-all-binary
+    pull: always
+    image: plugins/github-release
+    settings:
+      api_key:
+        from_secret: github_release_api_key
+      files:
+        - "dist/release/*"
+    when:
+      event:
+        - tag
+
+trigger:
+  ref:
+    - "refs/tags/**"
+
+depends_on:
+  - testing
+
+#---
+#kind: pipeline
+#name: notifications
+#
+#platform:
+#  os: linux
+#  arch: amd64
+#
+#steps:
+#  - name: manifest
+#    pull: always
+#    image: plugins/manifest
+#    settings:
+#      ignore_missing: true
+#      password:
+#        from_secret: docker_password
+#      spec: docker/manifest.tmpl
+#      username:
+#        from_secret: docker_username
+#
+#trigger:
+#  ref:
+#    - refs/heads/master
+#    - "refs/tags/**"
+#
+#depends_on:
+#  - linux-amd64
+#  - linux-arm64
+#  - linux-arm
+#  - release-binary
+#
+#...

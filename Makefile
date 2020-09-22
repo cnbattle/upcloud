@@ -1,13 +1,23 @@
 DIST := dist
-EXECUTABLE := api
+EXECUTABLE := upcloud
 GOFMT ?= gofmt "-s"
 GO ?= go
 
+# for dockerhub
+DEPLOY_ACCOUNT := cnbattle
+DEPLOY_IMAGE := $(EXECUTABLE)
+
 TARGETS ?= linux darwin windows
-ARCHS ?= amd64 386
-PACKAGES ?= $(shell $(GO) list ./...)
+ARCHS ?= amd64
 SOURCES ?= $(shell find . -name "*.go" -type f)
 TAGS ?=
+LDFLAGS ?= -X 'main.Version=$(VERSION)'
+
+ifneq ($(shell uname), Darwin)
+	EXTLDFLAGS = -extldflags "-static" $(null)
+else
+	EXTLDFLAGS =
+endif
 
 ifneq ($(DRONE_TAG),)
 	VERSION ?= $(DRONE_TAG)
@@ -15,23 +25,13 @@ else
 	VERSION ?= $(shell git describe --tags --always || git rev-parse --short HEAD)
 endif
 
-LDFLAGS ?= -X 'main.Version=$(VERSION)' -X 'main.DroneBuildNumber=$(DRONE_BUILD_NUMBER)' -X 'main.DroneTag=$(DRONE_TAG)'
-
-#ifneq ($(shell uname), Darwin)
-#	EXTLDFLAGS = -extldflags "-static" $(null)
-##	EXTLDFLAGS = -extldflags $(null)
-#else
-#	EXTLDFLAGS =
-#endif
-EXTLDFLAGS = -extldflags "-static" $(null)
-
 all: build
 
 fmt:
 	$(GOFMT) -w $(SOURCES)
 
 vet:
-	$(GO) vet $(PACKAGES)
+	$(GO) vet ./...
 
 lint:
 	@hash revive > /dev/null 2>&1; if [ $$? -ne 0 ]; then \
@@ -62,18 +62,21 @@ fmt-check:
 		exit 1; \
 	fi;
 
-verify: vet misspell-check fmt-check
-
 test: fmt-check
 	@$(GO) test -v -cover -coverprofile coverage.txt ./... && echo "\n==>\033[32m Ok\033[m\n" || exit 1
 
-build:
-	$(GO) build -v -tags "$(TAGS)" -ldflags "$(EXTLDFLAGS) -s -w $(LDFLAGS)"  .
+install: $(SOURCES)
+	$(GO) install -v -tags '$(TAGS)' -ldflags '$(EXTLDFLAGS)-s -w $(LDFLAGS)'
+
+build: $(EXECUTABLE)
+
+$(EXECUTABLE): $(SOURCES)
+	$(GO) build -v -tags '$(TAGS)' -ldflags '$(EXTLDFLAGS)-s -w $(LDFLAGS)' -o $@
 
 release: release-dirs release-build release-copy release-check
 
 release-dirs:
-	rm -rf $(DIST); mkdir -p $(DIST)/binaries $(DIST)/release
+	mkdir -p $(DIST)/binaries $(DIST)/release
 
 release-build:
 	@which gox > /dev/null; if [ $$? -ne 0 ]; then \
@@ -86,3 +89,33 @@ release-copy:
 
 release-check:
 	cd $(DIST)/release; $(foreach file,$(wildcard $(DIST)/release/$(EXECUTABLE)-*),sha256sum $(notdir $(file)) > $(notdir $(file)).sha256;)
+
+build_linux_amd64:
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 $(GO) build -a -tags '$(TAGS)' -ldflags '$(EXTLDFLAGS)-s -w $(LDFLAGS)' -o release/linux/amd64/$(DEPLOY_IMAGE)
+
+build_linux_i386:
+	CGO_ENABLED=0 GOOS=linux GOARCH=386 $(GO) build -a -tags '$(TAGS)' -ldflags '$(EXTLDFLAGS)-s -w $(LDFLAGS)' -o release/linux/i386/$(DEPLOY_IMAGE)
+
+build_linux_arm64:
+	CGO_ENABLED=0 GOOS=linux GOARCH=arm64 $(GO) build -a -tags '$(TAGS)' -ldflags '$(EXTLDFLAGS)-s -w $(LDFLAGS)' -o release/linux/arm64/$(DEPLOY_IMAGE)
+
+build_linux_arm:
+	CGO_ENABLED=0 GOOS=linux GOARCH=arm GOARM=7 $(GO) build -a -tags '$(TAGS)' -ldflags '$(EXTLDFLAGS)-s -w $(LDFLAGS)' -o release/linux/arm/$(DEPLOY_IMAGE)
+
+docker_image:
+	docker build -t $(DEPLOY_ACCOUNT)/$(DEPLOY_IMAGE) .
+
+docker: docker_image
+
+docker_deploy:
+ifeq ($(tag),)
+	@echo "Usage: make $@ tag=<tag>"
+	@exit 1
+endif
+	# deploy image
+	docker tag $(DEPLOY_ACCOUNT)/$(DEPLOY_IMAGE):latest $(DEPLOY_ACCOUNT)/$(DEPLOY_IMAGE):$(tag)
+	docker push $(DEPLOY_ACCOUNT)/$(DEPLOY_IMAGE):$(tag)
+
+clean:
+	$(GO) clean -x -i ./...
+	rm -rf coverage.txt $(EXECUTABLE) $(DIST)

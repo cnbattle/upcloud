@@ -10,6 +10,7 @@ import (
 	"io/ioutil"
 )
 
+// Create 创建配置
 var Create *cobra.Command
 
 func init() {
