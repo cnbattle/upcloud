@@ -7,6 +7,6 @@ import (
 
 func main() {
 	var rootCmd = &cobra.Command{Use: "upcloud"}
-	rootCmd.AddCommand(cmd.Create, cmd.List, cmd.Deploy)
+	rootCmd.AddCommand(cmd.Create, cmd.Delete, cmd.List, cmd.Deploy)
 	rootCmd.Execute()
 }
