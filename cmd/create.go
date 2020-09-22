@@ -19,13 +19,17 @@ func init() {
 		Long:  `create deploy config data.`,
 		Run: func(cmd *cobra.Command, args []string) {
 			// 选择平台
-			for i, i2 := range cloud.Platform {
-				i++
-				fmt.Printf("%v-%s\n", i, i2)
-			}
-			fmt.Print("Select Platform No：")
 			var index int
-			fmt.Scanln(&index)
+			if len(cloud.Platform) > 0 {
+				for i, i2 := range cloud.Platform {
+					i++
+					fmt.Printf("%v-%s\n", i, i2)
+				}
+				fmt.Print("Select Platform No：")
+				fmt.Scanln(&index)
+			} else {
+				index = 1
+			}
 			platform, err := cloud.SelectPlatform(cloud.Platform[index-1])
 			if err != nil {
 				panic(err)

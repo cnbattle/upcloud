@@ -2,11 +2,9 @@ package cloud
 
 import (
 	"context"
-	"fmt"
 	"github.com/cnbattle/upcloud/config"
 	"net/http"
 	"net/url"
-	"strings"
 
 	"github.com/tencentyun/cos-go-sdk-v5"
 )
