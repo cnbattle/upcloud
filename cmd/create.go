@@ -20,7 +20,7 @@ func init() {
 		Run: func(cmd *cobra.Command, args []string) {
 			// 选择平台
 			var index int
-			if len(cloud.Platform) > 0 {
+			if len(cloud.Platform) > 1 {
 				for i, i2 := range cloud.Platform {
 					i++
 					fmt.Printf("%v-%s\n", i, i2)
@@ -45,6 +45,7 @@ func init() {
 			if err != nil {
 				panic(err)
 			}
+			fmt.Println("success")
 		},
 	}
 

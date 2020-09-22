@@ -5,7 +5,7 @@ import (
 )
 
 func init() {
-	Platform = append(Platform, "aliyun")
+	//Platform = append(Platform, "aliyun")
 }
 
 type Aliyun struct {

@@ -10,7 +10,7 @@ import (
 )
 
 func init() {
-	Platform = append(Platform, "tencent")
+	//Platform = append(Platform, "tencent")
 }
 
 type Tencent struct {
