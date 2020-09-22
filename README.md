@@ -11,7 +11,5 @@
 - [ ] UCloud
 - [ ] 青云 QingCloud
 - [ ] 京东智联云
-- [ ] UCloud
-- [ ] UCloud
 - [ ] AWS
 - [ ] Google Cloud
