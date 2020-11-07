@@ -21,6 +21,7 @@ type Tencent struct {
 	Client    *cos.Client
 }
 
+// Init 初始化
 func (t *Tencent) Init() error {
 	u, err := url.Parse(t.VisitNode)
 	if err != nil {
@@ -36,6 +37,7 @@ func (t *Tencent) Init() error {
 	return nil
 }
 
+// GetAll 获取全部文件key
 func (t *Tencent) GetAll() (list []string, err error) {
 	opt := &cos.BucketGetOptions{
 		Prefix: "",
@@ -51,6 +53,7 @@ func (t *Tencent) GetAll() (list []string, err error) {
 	return
 }
 
+// DelAll 批量删除
 func (t *Tencent) DelAll(list []string) error {
 	for _, item := range list {
 		_, err := t.Client.Object.Delete(context.Background(), item)
@@ -61,6 +64,7 @@ func (t *Tencent) DelAll(list []string) error {
 	return nil
 }
 
+// Upload 上传
 func (t *Tencent) Upload(localFile, upKey string) error {
 	_, _, err := t.Client.Object.Upload(context.Background(), upKey, localFile, nil)
 	if err != nil {
@@ -69,6 +73,7 @@ func (t *Tencent) Upload(localFile, upKey string) error {
 	return nil
 }
 
+// Prefetch 刷新
 func (t *Tencent) Prefetch(urls []string) error {
 	credential := common.NewCredential(t.SecretID, t.SecretKey)
 	cpf := profile.NewClientProfile()
