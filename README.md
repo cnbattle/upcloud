@@ -4,7 +4,7 @@
 [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
 
 
-上传前端项目到CDN平台的工具
+上传前端项目到CDN平台及自动刷新节点缓存的工具
 
 ## USE
 1. 下载对于平台可执行文件,放置到系统PATH目录下, 或
