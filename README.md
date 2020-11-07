@@ -16,7 +16,7 @@ go get -u github.com/cnbattle/upcloud
 ## TODO
 - [x] Qiniu Cloud
 - [x] Tencent Cloud
-- [ ] Aliyun
+- [x] Aliyun
 - [ ] 华为云
 - [ ] 百度云
 - [ ] 滴滴云
@@ -46,6 +46,18 @@ UP_CLOUD_PATH=dist/
 
 UP_CLOUD_ACCESS_KEY=your access key
 UP_CLOUD_SECRET_KEY=your secret key
+UP_CLOUD_BUCKET=your bucket
+UP_CLOUD_PREFETCH_URLS=your prefetch urls (多个用,分割)
+```
+
+### 阿里云
+```.env
+UP_CLOUD_PLATFORM=aliyun
+UP_CLOUD_PATH=dist/
+
+UP_CLOUD_ENDPOINT=your endpoint
+UP_CLOUD_ACCESS_KEY_ID=your access key id
+UP_CLOUD_ACCESS_KEY_SECRET=your access key secret
 UP_CLOUD_BUCKET=your bucket
 UP_CLOUD_PREFETCH_URLS=your prefetch urls (多个用,分割)
 ```
