@@ -7,27 +7,12 @@
 上传前端项目到CDN平台的工具
 
 ## USE
-```
-$ upcloud
-Usage:
-  upcloud [command]
-
-Available Commands:
-  create      create deploy config data.
-  delete      delete a config data.
-  deploy      deploy a config
-  help        Help about any command
-  list        look project lists.
-
-Flags:
-  -h, --help   help for upcloud
-
-Use "upcloud [command] --help" for more information about a command.
-```
+- 下载对于平台可执行文件,放置到系统PATH目录下
+- 根据使用的对象存储平台创建配置 .env 文件, 具体参考下面示例
 
 ## TODO
 - [x] Qiniu Cloud
-- [ ] Tencent Cloud
+- [x] Tencent Cloud
 - [ ] Aliyun
 - [ ] 华为云
 - [ ] 百度云
@@ -37,3 +22,27 @@ Use "upcloud [command] --help" for more information about a command.
 - [ ] 京东智联云
 - [ ] AWS
 - [ ] Google Cloud
+
+## 各平台配置示例
+
+### 腾讯云 COS
+```.env
+UP_CLOUD_PLATFORM=tencent
+UP_CLOUD_PATH=dist/
+
+#UP_CLOUD_SECRET_ID=your id 
+#UP_CLOUD_SECRET_KEY=your key
+#UP_CLOUD_VISIT_NODE=your visis node
+#UP_CLOUD_PREFETCH_URLS=your prefetch urls (多个用,分割)
+```
+
+### 七牛云
+```.env
+UP_CLOUD_PLATFORM=qiniu
+UP_CLOUD_PATH=dist/
+
+UP_CLOUD_ACCESS_KEY=your access key
+UP_CLOUD_SECRET_KEY=your secret key
+UP_CLOUD_BUCKET=your bucket
+UP_CLOUD_PREFETCH_URLS=your prefetch urls (多个用,分割)
+```

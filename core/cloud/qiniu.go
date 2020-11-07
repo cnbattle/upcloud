@@ -3,16 +3,11 @@ package cloud
 import (
 	"context"
 	"fmt"
-	"github.com/cnbattle/upcloud/config"
 	"github.com/qiniu/api.v7/v7/auth/qbox"
 	"github.com/qiniu/api.v7/v7/cdn"
 	"github.com/qiniu/api.v7/v7/sms/rpc"
 	"github.com/qiniu/api.v7/v7/storage"
 )
-
-func init() {
-	Platform = append(Platform, "qiniu")
-}
 
 // Qiniu 七牛云
 type Qiniu struct {
@@ -115,45 +110,9 @@ func (q *Qiniu) Upload(localFile, upKey string) error {
 }
 
 // Prefetch 刷新
-func (q *Qiniu) Prefetch() error {
+func (q *Qiniu) Prefetch(urls []string) error {
 	cdnManager := cdn.NewCdnManager(q.Mac)
-	//刷新链接，单次请求链接不可以超过10个，如果超过，请分批发送请求
-	urlsToRefresh := []string{
-		"http://h5.ygxsj.com/",
-	}
-	_, err := cdnManager.RefreshDirs(urlsToRefresh)
+	_, err := cdnManager.RefreshUrls(urls)
+	_, err = cdnManager.PrefetchUrls(urls)
 	return err
-}
-
-// Setting 设置
-func (q *Qiniu) Setting() config.ProjectConfig {
-	var projectName, path, accessKey, secretKey, bucket string
-START:
-	fmt.Print("Project Name：")
-	fmt.Scanln(&projectName)
-	err := config.IsExitProjectName(projectName)
-	if err != nil {
-		fmt.Println("已存在，请重新输入")
-		goto START
-	}
-	fmt.Print("Project Path：")
-	fmt.Scanln(&path)
-	fmt.Print("Qiniu AccessKey：")
-	fmt.Scanln(&accessKey)
-	fmt.Print("Qiniu SecretKey：")
-	fmt.Scanln(&secretKey)
-	fmt.Print("Qiniu Bucket：")
-	fmt.Scanln(&bucket)
-
-	project := config.ProjectConfig{
-		ProjectName: projectName,
-		Platform:    "qiniu",
-		Path:        path,
-		Args: map[string]string{
-			"accessKey": accessKey,
-			"secretKey": secretKey,
-			"bucket":    bucket,
-		},
-	}
-	return project
 }
