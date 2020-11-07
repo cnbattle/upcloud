@@ -7,8 +7,11 @@
 上传前端项目到CDN平台的工具
 
 ## USE
-- 下载对于平台可执行文件,放置到系统PATH目录下
-- 根据使用的对象存储平台创建配置 .env 文件, 具体参考下面示例
+1. 下载对于平台可执行文件,放置到系统PATH目录下, 或
+```shell script
+go get -u github.com/cnbattle/upcloud
+```
+2. 根据使用的对象存储平台创建配置 .env 文件, 具体参考下面示例
 
 ## TODO
 - [x] Qiniu Cloud
