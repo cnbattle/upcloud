@@ -14,9 +14,9 @@ go get -u github.com/cnbattle/upcloud
 2. 根据使用的对象存储平台创建配置 .env 文件, 具体参考下面示例
 
 ## TODO
-- [x] Qiniu Cloud
-- [x] Tencent Cloud
-- [x] Aliyun
+- [x] 腾讯云
+- [x] 七牛云
+- [x] 阿里云
 - [ ] 华为云
 - [ ] 百度云
 - [ ] 滴滴云
