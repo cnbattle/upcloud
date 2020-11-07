@@ -30,10 +30,10 @@
 UP_CLOUD_PLATFORM=tencent
 UP_CLOUD_PATH=dist/
 
-#UP_CLOUD_SECRET_ID=your id 
-#UP_CLOUD_SECRET_KEY=your key
-#UP_CLOUD_VISIT_NODE=your visis node
-#UP_CLOUD_PREFETCH_URLS=your prefetch urls (多个用,分割)
+UP_CLOUD_SECRET_ID=your id 
+UP_CLOUD_SECRET_KEY=your key
+UP_CLOUD_VISIT_NODE=your visis node
+UP_CLOUD_PREFETCH_URLS=your prefetch urls (多个用,分割)
 ```
 
 ### 七牛云
