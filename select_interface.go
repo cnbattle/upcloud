@@ -25,7 +25,7 @@ func selectInterFace(platform string) (cloud.CommInterface, error) {
 	case "aliyun":
 		platformStruct := cloud.Aliyun{
 			Endpoint:        config.GetEnv("UP_CLOUD_ENDPOINT"),
-			AccessKeyId:     config.GetEnv("UP_CLOUD_ACCESS_KEY_ID"),
+			AccessKeyID:     config.GetEnv("UP_CLOUD_ACCESS_KEY_ID"),
 			AccessKeySecret: config.GetEnv("UP_CLOUD_ACCESS_KEY_SECRET"),
 			Bucket:          config.GetEnv("UP_CLOUD_BUCKET"),
 		}

@@ -10,7 +10,7 @@ import (
 // Aliyun oss
 type Aliyun struct {
 	Endpoint        string
-	AccessKeyId     string
+	AccessKeyID     string
 	AccessKeySecret string
 	Bucket          string
 	bucketClient    *oss.Bucket
@@ -18,7 +18,7 @@ type Aliyun struct {
 
 // Init 初始化
 func (t *Aliyun) Init() error {
-	client, err := oss.New(t.Endpoint, t.AccessKeyId, t.AccessKeySecret)
+	client, err := oss.New(t.Endpoint, t.AccessKeyID, t.AccessKeySecret)
 	if err != nil {
 		return err
 	}
@@ -62,7 +62,7 @@ func (t *Aliyun) Upload(localFile, upKey string) error {
 
 // Prefetch 刷新
 func (t *Aliyun) Prefetch(urls []string) error {
-	client, err := cdn.NewClientWithAccessKey("", t.AccessKeyId, t.AccessKeySecret)
+	client, err := cdn.NewClientWithAccessKey("", t.AccessKeyID, t.AccessKeySecret)
 	if err != nil {
 		return err
 	}
