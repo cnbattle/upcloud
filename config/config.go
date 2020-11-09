@@ -1,6 +1,7 @@
 package config
 
 import (
+	"errors"
 	"os"
 	"strconv"
 	"strings"
@@ -9,6 +10,24 @@ import (
 // GetEnv GetEnv
 func GetEnv(key string) (value string) {
 	return os.Getenv(key)
+}
+
+// GetEnvForError GetEnvForError
+func GetEnvForError(key string) (value string, err error) {
+	value = os.Getenv(key)
+	if len(value) == 0 {
+		err = errors.New("Configuration not obtained")
+	}
+	return
+}
+
+// GetEnvForPanic GetEnvForPanic
+func GetEnvForPanic(key string) (value string) {
+	value = os.Getenv(key)
+	if len(value) == 0 {
+		panic("Configuration not obtained")
+	}
+	return
 }
 
 // GetDefaultEnv GetDefaultEnv

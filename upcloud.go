@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	platform := config.GetEnv("UP_CLOUD_PLATFORM")
+	platform := config.GetEnvForPanic("UP_CLOUD_PLATFORM")
 	commInterface, err := selectInterFace(platform)
 	if err != nil {
 		fmt.Println("selectInterFace error:", err)
@@ -29,11 +29,11 @@ func main() {
 	}
 	// 上传新的文件
 	fmt.Println("Start uploading data.")
-	files := utils.Local(config.GetEnv("UP_CLOUD_PATH"))
+	files := utils.Local(config.GetEnvForPanic("UP_CLOUD_PATH"))
 	for _, file := range files {
 		fmt.Print(".")
 		file = strings.Replace(file, "\\", "/", -1)
-		err := commInterface.Upload(config.GetEnv("UP_CLOUD_PATH")+file, file)
+		err := commInterface.Upload(config.GetEnvForPanic("UP_CLOUD_PATH")+file, file)
 		if err != nil {
 			fmt.Println("commInterface.Upload error:", err)
 			return
@@ -41,7 +41,7 @@ func main() {
 	}
 	fmt.Println()
 	fmt.Println("Start refreshing CDN data.")
-	prefetch := config.GetEnv("UP_CLOUD_PREFETCH_URLS")
+	prefetch := config.GetEnvForPanic("UP_CLOUD_PREFETCH_URLS")
 	err = commInterface.Prefetch(strings.Split(prefetch, ","))
 	if err != nil {
 		fmt.Println("commInterface.Prefetch error:", err)

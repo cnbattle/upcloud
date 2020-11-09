@@ -10,24 +10,24 @@ func selectInterFace(platform string) (cloud.CommInterface, error) {
 	switch platform {
 	case "qiniu":
 		platformStruct := cloud.Qiniu{
-			AccessKey: config.GetEnv("UP_CLOUD_ACCESS_KEY"),
-			SecretKey: config.GetEnv("UP_CLOUD_SECRET_KEY"),
-			Bucket:    config.GetEnv("UP_CLOUD_BUCKET"),
+			AccessKey: config.GetEnvForPanic("UP_CLOUD_ACCESS_KEY"),
+			SecretKey: config.GetEnvForPanic("UP_CLOUD_SECRET_KEY"),
+			Bucket:    config.GetEnvForPanic("UP_CLOUD_BUCKET"),
 		}
 		return &platformStruct, nil
 	case "tencent":
 		platformStruct := cloud.Tencent{
-			SecretID:  config.GetEnv("UP_CLOUD_SECRET_ID"),
-			SecretKey: config.GetEnv("UP_CLOUD_SECRET_KEY"),
-			VisitNode: config.GetEnv("UP_CLOUD_VISIT_NODE"),
+			SecretID:  config.GetEnvForPanic("UP_CLOUD_SECRET_ID"),
+			SecretKey: config.GetEnvForPanic("UP_CLOUD_SECRET_KEY"),
+			VisitNode: config.GetEnvForPanic("UP_CLOUD_VISIT_NODE"),
 		}
 		return &platformStruct, nil
 	case "aliyun":
 		platformStruct := cloud.Aliyun{
-			Endpoint:        config.GetEnv("UP_CLOUD_ENDPOINT"),
-			AccessKeyID:     config.GetEnv("UP_CLOUD_ACCESS_KEY_ID"),
-			AccessKeySecret: config.GetEnv("UP_CLOUD_ACCESS_KEY_SECRET"),
-			Bucket:          config.GetEnv("UP_CLOUD_BUCKET"),
+			Endpoint:        config.GetEnvForPanic("UP_CLOUD_ENDPOINT"),
+			AccessKeyID:     config.GetEnvForPanic("UP_CLOUD_ACCESS_KEY_ID"),
+			AccessKeySecret: config.GetEnvForPanic("UP_CLOUD_ACCESS_KEY_SECRET"),
+			Bucket:          config.GetEnvForPanic("UP_CLOUD_BUCKET"),
 		}
 		return &platformStruct, nil
 	default:
