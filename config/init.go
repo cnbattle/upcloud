@@ -1,6 +1,12 @@
 package config
 
 import (
-	// 自动加载配置文件
-	_ "github.com/joho/godotenv/autoload"
+	"github.com/joho/godotenv"
 )
+
+func init() {
+	err := godotenv.Load(".upcloud.env")
+	if err != nil {
+		panic(err)
+	}
+}

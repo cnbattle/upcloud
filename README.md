@@ -11,7 +11,7 @@
 ```shell script
 go get -u github.com/cnbattle/upcloud
 ```
-2. 根据使用的对象存储平台创建配置 .env 文件, 具体参考下面示例
+2. 根据使用的对象存储平台创建配置 `.upcloud.env` 文件, 具体参考下面示例
 
 ## TODO
 - [x] 腾讯云
@@ -26,7 +26,7 @@ go get -u github.com/cnbattle/upcloud
 - [ ] AWS
 - [ ] Google Cloud
 
-## 各平台配置示例
+## 各平台`.upcloud.env`配置示例
 
 ### 腾讯云 COS
 ```.env
