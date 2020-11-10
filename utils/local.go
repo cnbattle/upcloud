@@ -6,6 +6,7 @@ import (
 	"strings"
 )
 
+// FilesStr Files struct
 type FilesStr struct {
 	Local string
 	UpKey string
