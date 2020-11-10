@@ -19,7 +19,7 @@ func Local(pwd string) (files []FilesStr) {
 			return err
 		}
 		if !info.IsDir() {
-			files = append(files, handleToStruct(pwd, path))
+			files = append(files, handlePathToStruct(pwd, path))
 		}
 		return nil
 	})
@@ -29,7 +29,8 @@ func Local(pwd string) (files []FilesStr) {
 	return
 }
 
-func handleToStruct(pwd, path string) FilesStr {
+// handlePathToStruct handlePathToStruct
+func handlePathToStruct(pwd, path string) FilesStr {
 	path = strings.Replace(path, "\\", "/", -1)
 	pwdLen := len(pwd)
 	if !strings.EqualFold(pwd[len(pwd)-1:], "/") {
