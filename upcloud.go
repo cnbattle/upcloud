@@ -31,9 +31,9 @@ func main() {
 	fmt.Println("Start uploading data.")
 	files := utils.Local(config.GetEnvForPanic("UP_CLOUD_PATH"))
 	for _, file := range files {
-		fmt.Print(".")
-		file = strings.Replace(file, "\\", "/", -1)
-		err := commInterface.Upload(config.GetEnvForPanic("UP_CLOUD_PATH")+file, file)
+		fmt.Println(file)
+		//fmt.Print(".")
+		err := commInterface.Upload(file.Local, file.UpKey)
 		if err != nil {
 			fmt.Println("commInterface.Upload error:", err)
 			return
