@@ -2,8 +2,8 @@ package main
 
 import (
 	"errors"
+	"github.com/cnbattle/upcloud/cloud"
 	"github.com/cnbattle/upcloud/config"
-	"github.com/cnbattle/upcloud/core/cloud"
 )
 
 func selectInterFace(platform string) (cloud.CommInterface, error) {

@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/cnbattle/upcloud/config"
-	"github.com/cnbattle/upcloud/core/utils"
+	"github.com/cnbattle/upcloud/utils"
 	"strings"
 )
 

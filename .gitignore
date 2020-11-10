@@ -18,5 +18,4 @@
 
 dist/
 .idea
-.env
 .upcloud.env
