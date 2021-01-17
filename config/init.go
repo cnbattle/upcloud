@@ -10,7 +10,7 @@ import (
 func init() {
 	err := godotenv.Load(".upcloud.env")
 	if err != nil {
-		fmt.Println(".upcloud.env configuration file does not exist")
+		fmt.Println(".upcloud.env the configuration file does not exist")
 		os.Exit(0)
 	}
 }
