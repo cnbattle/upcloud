@@ -7,8 +7,8 @@ GO ?= go
 DEPLOY_ACCOUNT := cnbattle
 DEPLOY_IMAGE := $(EXECUTABLE)
 
-TARGETS ?= linux darwin windows arm
-ARCHS ?= amd64 arm64
+TARGETS ?= linux darwin windows
+ARCHS ?= amd64
 SOURCES ?= $(shell find . -name "*.go" -type f)
 TAGS ?=
 LDFLAGS ?= -X 'main.Version=$(VERSION)'
