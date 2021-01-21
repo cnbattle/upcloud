@@ -55,8 +55,23 @@ func (t *Tencent) GetAll() (list []string, err error) {
 
 // DelAll 批量删除
 func (t *Tencent) DelAll(list []string) error {
-	for _, item := range list {
-		_, err := t.Client.Object.Delete(context.Background(), item)
+	obs := []cos.Object{}
+	for _, v := range list {
+		obs = append(obs, cos.Object{Key: v})
+		if len(obs) == 1000 {
+			_, _, err := t.Client.Object.DeleteMulti(context.Background(), &cos.ObjectDeleteMultiOptions{
+				Objects: obs,
+			})
+			if err != nil {
+				return err
+			}
+			obs = []cos.Object{}
+		}
+	}
+	if len(obs) > 0 {
+		_, _, err := t.Client.Object.DeleteMulti(context.Background(), &cos.ObjectDeleteMultiOptions{
+			Objects: obs,
+		})
 		if err != nil {
 			return err
 		}

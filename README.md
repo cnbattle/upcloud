@@ -17,53 +17,53 @@ go get -u github.com/cnbattle/upcloud
 
 ### 功能
 
-- [ ] 多线程上传
+- [x] 多线程上传
 
 ### 多平台
 - [x] 腾讯云
 - [x] 七牛云
 - [x] 阿里云
-- [ ] 华为云
-- [ ] 百度云
-- [ ] 滴滴云
-- [ ] UCloud
-- [ ] 青云 QingCloud
-- [ ] 京东智联云
-- [ ] AWS
-- [ ] Google Cloud
 
 ## 各平台`.upcloud.env`配置示例
+
+- UP_CLOUD_PLATFORM： 平台
+- UP_CLOUD_PATH： 需上传静态资源路径
+- UP_CLOUD_POOL_SIZE： 上传时的并发数，默认为10
+- UP_CLOUD_PREFETCH_URLS： 上传完成，要刷新缓存的链接，VUE React等静态站点一般刷新首页index.html即可
 
 ### 腾讯云 COS
 ```.env
 UP_CLOUD_PLATFORM=tencent
 UP_CLOUD_PATH=dist/
+UP_CLOUD_POOL_SIZE=10
+UP_CLOUD_PREFETCH_URLS=your prefetch urls (多个用,分割)
 
 UP_CLOUD_SECRET_ID=your id 
 UP_CLOUD_SECRET_KEY=your key
 UP_CLOUD_VISIT_NODE=your visis node
-UP_CLOUD_PREFETCH_URLS=your prefetch urls (多个用,分割)
 ```
 
 ### 七牛云
 ```.env
 UP_CLOUD_PLATFORM=qiniu
 UP_CLOUD_PATH=dist/
+UP_CLOUD_POOL_SIZE=10
+UP_CLOUD_PREFETCH_URLS=your prefetch urls (多个用,分割)
 
 UP_CLOUD_ACCESS_KEY=your access key
 UP_CLOUD_SECRET_KEY=your secret key
 UP_CLOUD_BUCKET=your bucket
-UP_CLOUD_PREFETCH_URLS=your prefetch urls (多个用,分割)
 ```
 
 ### 阿里云
 ```.env
 UP_CLOUD_PLATFORM=aliyun
 UP_CLOUD_PATH=dist/
+UP_CLOUD_POOL_SIZE=10
+UP_CLOUD_PREFETCH_URLS=your prefetch urls (多个用,分割)
 
 UP_CLOUD_ENDPOINT=your endpoint
 UP_CLOUD_ACCESS_KEY_ID=your access key id
 UP_CLOUD_ACCESS_KEY_SECRET=your access key secret
 UP_CLOUD_BUCKET=your bucket
-UP_CLOUD_PREFETCH_URLS=your prefetch urls (多个用,分割)
 ```

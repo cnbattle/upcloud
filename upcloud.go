@@ -2,9 +2,13 @@ package main
 
 import (
 	"fmt"
+	"strings"
+	"sync"
+
 	"github.com/cnbattle/upcloud/config"
 	"github.com/cnbattle/upcloud/utils"
-	"strings"
+
+	"github.com/panjf2000/ants/v2"
 )
 
 func main() {
@@ -30,15 +34,21 @@ func main() {
 	// 上传新的文件
 	fmt.Println("Start uploading data.")
 	files := utils.Local(config.GetEnvForPanic("UP_CLOUD_PATH"))
+	pool, _ := ants.NewPool(config.GetDefaultEnvToInt("UP_CLOUD_POOL_SIZE", 10))
+	defer pool.Release()
+	var wg sync.WaitGroup
 	for _, file := range files {
-		fmt.Println(file)
-		//fmt.Print(".")
-		err := commInterface.Upload(file.Local, file.UpKey)
-		if err != nil {
-			fmt.Println("commInterface.Upload error:", err)
-			return
-		}
+		wg.Add(1)
+		_ = pool.Submit(func() {
+			err := commInterface.Upload(file.Local, file.UpKey)
+			if err != nil {
+				fmt.Println("commInterface.Upload error:", err)
+			}
+			fmt.Print(".")
+			wg.Done()
+		})
 	}
+	wg.Wait()
 	fmt.Println()
 	fmt.Println("Start refreshing CDN data.")
 	prefetch := config.GetEnvForPanic("UP_CLOUD_PREFETCH_URLS")

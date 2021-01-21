@@ -70,6 +70,24 @@ func (q *Qiniu) DelAll(list []string) error {
 	deleteOps := make([]string, 0, len(list))
 	for _, key := range list {
 		deleteOps = append(deleteOps, storage.URIDelete(q.Bucket, key))
+		if len(deleteOps) == 900 {
+			rets, err := q.BucketManager.Batch(deleteOps)
+			if err != nil {
+				// 遇到错误
+				if _, ok := err.(*rpc.ErrorInfo); ok {
+					for _, ret := range rets {
+						// 200 为成功
+						fmt.Printf("%d\n", ret.Code)
+						if ret.Code != 200 {
+							fmt.Printf("%s\n", ret.Data.Error)
+						}
+					}
+				} else {
+					fmt.Printf("batch error, %s", err)
+				}
+			}
+			deleteOps = make([]string, 0, len(list))
+		}
 	}
 	rets, err := q.BucketManager.Batch(deleteOps)
 	if err != nil {
@@ -92,16 +110,9 @@ func (q *Qiniu) DelAll(list []string) error {
 // Upload 上传
 func (q *Qiniu) Upload(localFile, upKey string) error {
 	cfg := storage.Config{}
-	// 空间对应的机房
-	cfg.Zone = &storage.ZoneHuadong
-	// 是否使用https域名
-	cfg.UseHTTPS = false
-	// 上传是否使用CDN上传加速
-	cfg.UseCdnDomains = false
 	// 构建表单上传的对象
 	formUploader := storage.NewFormUploader(&cfg)
 	ret := storage.PutRet{}
-
 	err := formUploader.PutFile(context.Background(), &ret, q.UpToken, upKey, localFile, nil)
 	if err != nil {
 		return err
