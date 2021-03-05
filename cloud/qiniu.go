@@ -30,9 +30,6 @@ func (q *Qiniu) Init() error {
 		// 是否使用https域名进行资源管理
 		UseHTTPS: false,
 	}
-	// 指定空间所在的区域，如果不指定将自动探测
-	// 如果没有特殊需求，默认不需要指定
-	//cfg.Zone=&storage.ZoneHuabei
 	q.BucketManager = storage.NewBucketManager(q.Mac, &cfg)
 
 	q.UpToken = putPolicy.UploadToken(q.Mac)
@@ -109,11 +106,15 @@ func (q *Qiniu) DelAll(list []string) error {
 
 // Upload 上传
 func (q *Qiniu) Upload(localFile, upKey string) error {
+	err := q.Init()
+	if err != nil {
+		return err
+	}
 	cfg := storage.Config{}
 	// 构建表单上传的对象
 	formUploader := storage.NewFormUploader(&cfg)
 	ret := storage.PutRet{}
-	err := formUploader.PutFile(context.Background(), &ret, q.UpToken, upKey, localFile, nil)
+	err = formUploader.PutFile(context.Background(), &ret, q.UpToken, upKey, localFile, nil)
 	if err != nil {
 		return err
 	}
