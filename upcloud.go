@@ -39,14 +39,19 @@ func main() {
 	var wg sync.WaitGroup
 	for _, file := range files {
 		wg.Add(1)
-		_ = pool.Submit(func() {
-			err := commInterface.Upload(file.Local, file.UpKey)
+		local := file.Local
+		upKey := file.UpKey
+		err = pool.Submit(func() {
+			err := commInterface.Upload(local, upKey)
 			if err != nil {
 				fmt.Println("commInterface.Upload error:", err)
 			}
 			fmt.Print(".")
 			wg.Done()
 		})
+		if err != nil {
+			fmt.Println("pool.Submit error:", err)
+		}
 	}
 	wg.Wait()
 	fmt.Println()
