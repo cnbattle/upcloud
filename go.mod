@@ -8,7 +8,7 @@ require (
 	github.com/baiyubin/aliyun-sts-go-sdk v0.0.0-20180326062324-cfa1a18b161f // indirect
 	github.com/joho/godotenv v1.3.0
 	github.com/panjf2000/ants/v2 v2.4.3
-	github.com/qiniu/api.v7/v7 v7.8.2
+	github.com/qiniu/go-sdk/v7 v7.9.1
 	github.com/satori/go.uuid v1.2.0 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go v1.0.112
 	github.com/tencentyun/cos-go-sdk-v5 v0.7.20

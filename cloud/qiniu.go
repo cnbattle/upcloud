@@ -3,10 +3,10 @@ package cloud
 import (
 	"context"
 	"fmt"
-	"github.com/qiniu/api.v7/v7/auth/qbox"
-	"github.com/qiniu/api.v7/v7/cdn"
-	"github.com/qiniu/api.v7/v7/sms/rpc"
-	"github.com/qiniu/api.v7/v7/storage"
+	"github.com/qiniu/go-sdk/v7/auth/qbox"
+	"github.com/qiniu/go-sdk/v7/cdn"
+	"github.com/qiniu/go-sdk/v7/sms/rpc"
+	"github.com/qiniu/go-sdk/v7/storage"
 )
 
 // Qiniu 七牛云
