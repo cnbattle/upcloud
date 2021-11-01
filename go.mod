@@ -12,6 +12,6 @@ require (
 	github.com/satori/go.uuid v1.2.0 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/cdn v1.0.282
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common v1.0.282
-	github.com/tencentyun/cos-go-sdk-v5 v0.7.20
+	github.com/tencentyun/cos-go-sdk-v5 v0.7.31
 	golang.org/x/time v0.0.0-20210220033141-f8bda1e9f3ba // indirect
 )
