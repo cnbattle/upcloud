@@ -7,7 +7,7 @@ require (
 	github.com/aliyun/aliyun-oss-go-sdk v2.1.6+incompatible
 	github.com/baiyubin/aliyun-sts-go-sdk v0.0.0-20180326062324-cfa1a18b161f // indirect
 	github.com/joho/godotenv v1.4.0
-	github.com/panjf2000/ants/v2 v2.4.3
+	github.com/panjf2000/ants/v2 v2.4.6
 	github.com/qiniu/go-sdk/v7 v7.9.1
 	github.com/satori/go.uuid v1.2.0 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/cdn v1.0.282
