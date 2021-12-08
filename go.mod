@@ -1,6 +1,6 @@
 module github.com/cnbattle/upcloud
 
-go 1.16
+go 1.17
 
 require (
 	github.com/aliyun/alibaba-cloud-sdk-go v1.61.1373
