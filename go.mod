@@ -3,7 +3,7 @@ module github.com/cnbattle/upcloud
 go 1.17
 
 require (
-	github.com/aliyun/alibaba-cloud-sdk-go v1.61.1386
+	github.com/aliyun/alibaba-cloud-sdk-go v1.61.1389
 	github.com/aliyun/aliyun-oss-go-sdk v2.2.0+incompatible
 	github.com/joho/godotenv v1.4.0
 	github.com/panjf2000/ants/v2 v2.4.7
@@ -24,5 +24,5 @@ require (
 	github.com/satori/go.uuid v1.2.0 // indirect
 	golang.org/x/sync v0.0.0-20201207232520-09787c993a3a // indirect
 	golang.org/x/time v0.0.0-20210220033141-f8bda1e9f3ba // indirect
-	gopkg.in/ini.v1 v1.62.0 // indirect
+	gopkg.in/ini.v1 v1.66.2 // indirect
 )
