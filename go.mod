@@ -8,7 +8,7 @@ require (
 	github.com/joho/godotenv v1.4.0
 	github.com/panjf2000/ants/v2 v2.4.7
 	github.com/qiniu/go-sdk/v7 v7.11.0
-	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/cdn v1.0.336
+	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/cdn v1.0.337
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common v1.0.336
 	github.com/tencentyun/cos-go-sdk-v5 v0.7.33
 )
