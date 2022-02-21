@@ -4,7 +4,7 @@ go 1.17
 
 require (
 	github.com/aliyun/alibaba-cloud-sdk-go v1.61.1485
-	github.com/aliyun/aliyun-oss-go-sdk v2.2.0+incompatible
+	github.com/aliyun/aliyun-oss-go-sdk v2.2.1+incompatible
 	github.com/joho/godotenv v1.4.0
 	github.com/panjf2000/ants/v2 v2.4.7
 	github.com/qiniu/go-sdk/v7 v7.11.1
