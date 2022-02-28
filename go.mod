@@ -9,7 +9,7 @@ require (
 	github.com/panjf2000/ants/v2 v2.4.8
 	github.com/qiniu/go-sdk/v7 v7.11.1
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/cdn v1.0.355
-	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common v1.0.355
+	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common v1.0.356
 	github.com/tencentyun/cos-go-sdk-v5 v0.7.33
 )
 
