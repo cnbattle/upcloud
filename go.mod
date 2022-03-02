@@ -10,14 +10,16 @@ require (
 	github.com/qiniu/go-sdk/v7 v7.11.1
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/cdn v1.0.358
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common v1.0.358
-	github.com/tencentyun/cos-go-sdk-v5 v0.7.33
+	github.com/tencentyun/cos-go-sdk-v5 v0.7.34
 )
 
 require (
 	github.com/baiyubin/aliyun-sts-go-sdk v0.0.0-20180326062324-cfa1a18b161f // indirect
+	github.com/clbanning/mxj v1.8.4 // indirect
 	github.com/google/go-querystring v1.0.0 // indirect
 	github.com/jmespath/go-jmespath v0.0.0-20180206201540-c2b33e8439af // indirect
 	github.com/json-iterator/go v1.1.5 // indirect
+	github.com/mitchellh/mapstructure v1.4.3 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.1 // indirect
 	github.com/mozillazg/go-httpheader v0.2.1 // indirect
