@@ -3,7 +3,7 @@ module github.com/cnbattle/upcloud
 go 1.17
 
 require (
-	github.com/aliyun/alibaba-cloud-sdk-go v1.61.1517
+	github.com/aliyun/alibaba-cloud-sdk-go v1.61.1520
 	github.com/aliyun/aliyun-oss-go-sdk v2.2.1+incompatible
 	github.com/joho/godotenv v1.4.0
 	github.com/panjf2000/ants/v2 v2.4.8
