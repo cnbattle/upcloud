@@ -9,3 +9,6 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    automerged_updates:
+      - match:
+          update_type: "in_range"
