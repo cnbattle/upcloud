@@ -6,7 +6,7 @@ require (
 	github.com/aliyun/alibaba-cloud-sdk-go v1.61.1586
 	github.com/aliyun/aliyun-oss-go-sdk v2.2.2+incompatible
 	github.com/joho/godotenv v1.4.0
-	github.com/panjf2000/ants/v2 v2.4.8
+	github.com/panjf2000/ants/v2 v2.5.0
 	github.com/qiniu/go-sdk/v7 v7.12.1
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/cdn v1.0.394
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common v1.0.394
