@@ -5,7 +5,7 @@ name: testing
 steps:
   - name: vet
     pull: always
-    image: golang:1.17
+    image: golang:1.19
     commands:
       - make vet
     volumes:
@@ -14,7 +14,7 @@ steps:
 
   - name: lint
     pull: always
-    image: golang:1.17
+    image: golang:1.19
     commands:
       - make lint
     volumes:
@@ -23,7 +23,7 @@ steps:
 
   - name: misspell
     pull: always
-    image: golang:1.17
+    image: golang:1.19
     commands:
       - make misspell-check
     volumes:
@@ -32,7 +32,7 @@ steps:
 
 #   - name: test
 #     pull: always
-#     image: golang:1.17
+#     image: golang:1.19
 #     commands:
 #       - make test
 #     volumes:
@@ -54,7 +54,7 @@ platform:
 steps:
   - name: build-all-binary
     pull: always
-    image: golang:1.17
+    image: golang:1.19
     commands:
       - make release
     when:

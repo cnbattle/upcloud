@@ -1,3 +1,4 @@
+// Package cloud 支持的云平台
 package cloud
 
 // CommInterface 基础接口

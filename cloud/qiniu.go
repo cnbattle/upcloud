@@ -1,3 +1,4 @@
+// Package cloud 支持的云平台
 package cloud
 
 import (
