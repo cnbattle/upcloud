@@ -10,7 +10,7 @@ require (
 	github.com/qiniu/go-sdk/v7 v7.13.0
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/cdn v1.0.539
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common v1.0.542
-	github.com/tencentyun/cos-go-sdk-v5 v0.7.39
+	github.com/tencentyun/cos-go-sdk-v5 v0.7.40
 )
 
 require (
