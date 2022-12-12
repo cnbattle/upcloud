@@ -6,7 +6,7 @@ require (
 	github.com/aliyun/alibaba-cloud-sdk-go v1.62.82
 	github.com/aliyun/aliyun-oss-go-sdk v2.2.6+incompatible
 	github.com/joho/godotenv v1.4.0
-	github.com/panjf2000/ants/v2 v2.6.0
+	github.com/panjf2000/ants/v2 v2.7.0
 	github.com/qiniu/go-sdk/v7 v7.14.0
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/cdn v1.0.555
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common v1.0.555
@@ -23,7 +23,7 @@ require (
 	github.com/modern-go/reflect2 v1.0.1 // indirect
 	github.com/mozillazg/go-httpheader v0.2.1 // indirect
 	github.com/opentracing/opentracing-go v1.2.1-0.20220228012449-10b1cf09e00b // indirect
-	golang.org/x/sync v0.0.0-20201207232520-09787c993a3a // indirect
+	golang.org/x/sync v0.1.0 // indirect
 	golang.org/x/time v0.0.0-20210220033141-f8bda1e9f3ba // indirect
 	gopkg.in/ini.v1 v1.66.2 // indirect
 )
