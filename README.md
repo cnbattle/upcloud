@@ -1,6 +1,6 @@
 # upcloud
 
-[![Build Status](https://github.com/cnbattle/upcloud/actions/workflows/vet.yml/badge.svg)](https://cloud.drone.io/cnbattle/upcloud)
+[![Build Status](https://github.com/cnbattle/upcloud/actions/workflows/vet.yml/badge.svg)](https://github.com/cnbattle/upcloud/actions)
 [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
 
 
