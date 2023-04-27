@@ -1,6 +1,6 @@
 github.com/QcloudApi/qcloud_sign_golang v0.0.0-20141224014652-e4130a326409/go.mod h1:1pk82RBxDY/JZnPQrtqHlUFfCctgdorsd9M06fMynOM=
-github.com/aliyun/alibaba-cloud-sdk-go v1.62.282 h1:UK4Eq2Xs1PfdI5w9CeNAHbZUGOT81oNAp+ahUtnjP1g=
-github.com/aliyun/alibaba-cloud-sdk-go v1.62.282/go.mod h1:Api2AkmMgGaSUAhmk76oaFObkoeCPc/bKAqcyplPODs=
+github.com/aliyun/alibaba-cloud-sdk-go v1.62.296 h1:fSZXZMcNHX52w4MwvY/YTVy/7h5d/nHd0uUs6qOTkI0=
+github.com/aliyun/alibaba-cloud-sdk-go v1.62.296/go.mod h1:Api2AkmMgGaSUAhmk76oaFObkoeCPc/bKAqcyplPODs=
 github.com/aliyun/aliyun-oss-go-sdk v2.2.7+incompatible h1:KpbJFXwhVeuxNtBJ74MCGbIoaBok2uZvkD7QXp2+Wis=
 github.com/aliyun/aliyun-oss-go-sdk v2.2.7+incompatible/go.mod h1:T/Aws4fEfogEE9v+HPhhw+CntffsBHJ8nXQCwKr0/g8=
 github.com/clbanning/mxj v1.8.4 h1:HuhwZtbyvyOw+3Z1AowPkU87JkJUSv751ELWaiTpj8I=
